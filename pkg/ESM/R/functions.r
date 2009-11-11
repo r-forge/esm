@@ -143,10 +143,11 @@ sortmat.byspe <- function(mat,spe)
 	return(mat)
 }
 
-draw.network <- function(data,color='grey',border=NA,...,sorted=hr)
+draw.network <- function(data,org.col='grey',res.col='grey',border=NA,sortorg=c(1:nrow(data)),sortres=c(1:ncol(data)),...)
 {
 	
-	data <- sortmat.byspe(data,getspe(data,sorted))
+	data <- sortmat.byspe(data,sortorg)
+	data <- t(sortmat.byspe(t(data),sortres))
 	
 	n.elements <- max(dim(data))
 	
@@ -161,7 +162,7 @@ draw.network <- function(data,color='grey',border=NA,...,sorted=hr)
 		inches=FALSE,
 		add=FALSE,
 		ylim=c(0.7,2.3),
-		bg=color,
+		bg=org.col,
 		fg=border,
 		...
 		)
@@ -183,7 +184,7 @@ draw.network <- function(data,color='grey',border=NA,...,sorted=hr)
 		circles=rep(0.4,length(pos.p)),
 		inches=FALSE,
 		add=TRUE,
-		bg=color,
+		bg=org.col,
 		fg=border,
 		main='Réseau',
 		xlab='',
@@ -195,7 +196,7 @@ draw.network <- function(data,color='grey',border=NA,...,sorted=hr)
 		circles=rep(0.4,length(pos.h)),
 		inches=FALSE,
 		add=TRUE,
-		bg=color,
+		bg=res.col,
 		fg=border
 		)
 }
