@@ -129,9 +129,12 @@ GDS <- function(mat)
 	D <- dim(mat)
 	N <- prod(D)
 	Ni <- sum(mat>0)/N
-	result <- matrix(c(D,N,Ni),nrow=1)
-	colnames(result) <- c('Resources','Organisms','Size','Completeness')
-	print(result)
+	out <- NULL
+	out$RES <- D[1]
+	out$ORGA <- D[2]
+	out$SIZE <- N
+	out$COMP <- Ni
+	return(out)
 }
 
 sortmat.byspe <- function(mat,spe)

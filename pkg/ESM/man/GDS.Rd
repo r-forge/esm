@@ -2,7 +2,7 @@
 \Rdversion{1.1} 
 \alias{GDS} 
 \title{Descriptive statistics}
-\description{Print basic description of a dataset}
+\description{Return a list with basic description of a dataset}
 \usage{ 
 GDS(mat)
 }
@@ -12,5 +12,8 @@ GDS(mat)
 }
 
 \value{
-	\item{}{Print the number of organisms, resources, interactions, and the fraction of interactions >0.}
+	\item{RES}{number of resources}
+	\item{ORGA}{number of organisms}
+	\item{SIZE}{number of interactions}
+	\item{COMPL}{proportion of interactions <0}
 }
