@@ -111,7 +111,7 @@ hr <- function(m)
 getspe <- function(mat,measure=hr)
 {
 	if(max(mat)!=1){mat<-mat/max(mat)}
-	out <- measure(mat)
+	out <- measure(as.matrix(mat))
 	names(out) <- rownames(mat)
 	return(out)
 }

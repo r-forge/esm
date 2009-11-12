@@ -1,4 +1,4 @@
-std.matrix <- function(filename,t=TRUE)
+std.matrix <- function(filename)
 {
 	dat <- read.table(filename)
 	if(t){dat<-t(dat)}
