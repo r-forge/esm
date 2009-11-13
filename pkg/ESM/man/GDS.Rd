@@ -15,5 +15,5 @@ GDS(mat)
 	\item{RES}{number of resources}
 	\item{ORGA}{number of organisms}
 	\item{SIZE}{number of interactions}
-	\item{COMPL}{proportion of interactions <0}
+	\item{COMPL}{proportion of interactions > 0}
 }
