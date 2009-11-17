@@ -15,7 +15,7 @@ get.SHANNON <- function(pop)
 		partiel[i] <- p * log(p)
 	}
 	shannon <- ifelse(length(pop)<=1,0,-sum(partiel) / log(length(pop)))
-	return(shannon)
+	return(1-shannon)
 }
 
 get.DFP <- function(fit)
