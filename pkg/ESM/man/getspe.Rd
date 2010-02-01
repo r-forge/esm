@@ -16,9 +16,9 @@ getspe(mat,measure=hr)
 	\item{}{A vector with the specificity of each organism. Uses names if the matrix as such property.}
 }
  
-\details{Values of \kbd{measure} can be : \kbd{hr}, the classical host range; \kbd{ssi}, the species specialization index; \kbd{dfp}, the DFP index; \kbd{shannon}, Shannon's entropy; \kbd{wadfp}, the weighted additive DFP.}
+\details{Values of \kbd{measure} can be : \kbd{hr}, the classical host range; \kbd{ssi}, the species specialization index; \kbd{fd}, the Fitness Differences index; \kbd{hs}, Shannon's entropy.}
 
-\references{For DFP and WADFP, and this package, cite : Poisot, T & Hochberg, M E "..." XXX.
+\references{For FD, and this package, cite : Poisot, T & Hochberg, M E "..." XXX.
 
 For HS, cite : Schug J, et al. (2005) Promoter features related to tissue specificity as measured by Shannon entropy. Genome biology 6(4):R33
 

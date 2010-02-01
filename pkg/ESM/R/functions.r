@@ -1,4 +1,4 @@
-get.DBF <- function(fit)
+get.LSD <- function(fit)
 {
 	fit <- sort(as.vector(fit),decreasing=TRUE)
 	test <- fit[2:length(fit)]
@@ -10,7 +10,7 @@ get.HR <- function(pop)
 {
 	Ni <- sum(pop>0)
 	N <- length(pop)
-	return(1-Ni/N)
+	return(1-(Ni-1)/(N-1))
 }
 
 get.HS <- function(pop)
@@ -36,12 +36,12 @@ get.SSI <- function(occup)
 	return(SSI)
 }
 
-dbf <- function(m)
+lsd <- function(m)
 {
 	spe <- vector('numeric',length=nrow(m))
 	for(i in 1:nrow(m))
 	{
-		spe[i] <- get.DBF(m[i,])
+		spe[i] <- get.LSD(m[i,])
 	}
 	return(spe)
 }
@@ -76,7 +76,7 @@ hr <- function(m)
 	return(spe)
 }
 
-getspe <- function(mat,measure=hr)
+getspe <- function(mat,measure=lsd)
 {
 	if(max(mat)!=1){mat<-mat/max(mat)}
 	out <- measure(as.matrix(mat))
