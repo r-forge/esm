@@ -41,7 +41,7 @@ draw.network <- function(data,org.col='grey',res.col='grey',border=NA,sortorg=c(
 		add=TRUE,
 		bg=org.col,
 		fg=border,
-		main='Réseau',
+		main='Web',
 		xlab='',
 		ylab=''
 		)

@@ -4,7 +4,7 @@
 \title{Specificity}
 \description{Returns a vector containing the specificity of each organism}
 \usage{ 
-getspe(mat,measure=hr)
+getspe(mat,measure=lsd)
 }
 
 \arguments{ 
@@ -16,9 +16,9 @@ getspe(mat,measure=hr)
 	\item{}{A vector with the specificity of each organism. Uses names if the matrix as such property.}
 }
  
-\details{Values of \kbd{measure} can be : \kbd{hr}, the classical host range; \kbd{ssi}, the species specialization index; \kbd{fd}, the Fitness Differences index; \kbd{hs}, Shannon's entropy.}
+\details{Values of \kbd{measure} can be : \kbd{rr}, the classical resource range; \kbd{ssi}, the species specialization index; \kbd{lsd}, the Link Strength Difference index; \kbd{hs}, Shannon's entropy.}
 
-\references{For FD, and this package, cite : Poisot, T & Hochberg, M E "..." XXX.
+\references{For LSD, and this package, cite : Poisot, T, Canard E, Mouquet N & Hochberg, M E "..." XXX.
 
 For HS, cite : Schug J, et al. (2005) Promoter features related to tissue specificity as measured by Shannon entropy. Genome biology 6(4):R33
 
@@ -29,5 +29,5 @@ For SSI, cite : Julliard R, Clavel J, Devictor V, Jiguet F, & Couvet D (2006) Sp
 MAT <- 'http://www.nceas.ucsb.edu/interactionweb/data/host_parasite/text_matrices/mcgregor_p.txt'
 mat <- t(read.table(MAT))
 # Returns host range
-getspe(mat,hr)
+getspe(mat,lsd)
 } 

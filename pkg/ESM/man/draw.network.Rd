@@ -19,9 +19,7 @@ draw.network(data,org.col='grey',res.col='grey',border=NA,sortorg=c(1:nrow(data)
 
 \examples{ 
 # Read an interaction matrix
-library(vegan)
-dune <- data(dune)
-dune <- as.matrix(dune/max(dune))
+intmat <- matrix(runif(100,0,1),ncol=10)
 # Plot
-draw.network(dune,org.col='palegreen',sortorg=rank(getspe(dune,hr)))
+draw.network(intmat,org.col='palegreen',sortorg=rank(getspe(intmat,lsd)))
 }

@@ -1,19 +1,19 @@
 \name{std.matrix} 
 \Rdversion{1.1} 
 \alias{std.matrix} 
-\title{Specificity}
-\description{Returns a vector containing the specificity of each organism}
+\title{Read an interaction matrix}
+\description{Returns an interaction matrix normalized to 1}
 \usage{ 
-getspe(mat,measure=hr)
+std.matrix(filename,t=FALSE)
 }
 
 \arguments{ 
-\item{mat}{A matrix giving the performance of each organism on each resource, with organisms as rows} 
-\item{measure}{The index of specificity to use. Values can be} 
+\item{filename}{The file containing the matrix (interaction)} 
+\item{t}{Logical to transpose the matrix, FALSE by default} 
 }
 
 \value{
-	\item{}{A vector with the specificity of each organism. Uses names if the matrix as such property.}
+	\item{}{An interaction matrix}
 }
  
 \details{Values of \kbd{measure} can be : \kbd{hr}, the classical host range; \kbd{ssi}, the species specialization index; \kbd{dfp}, the DFP index; \kbd{shannon}, Shannon's entropy; \kbd{wadfp}, the weighted additive DFP.}
@@ -26,8 +26,5 @@ For SSI, cite : Julliard R, Clavel J, Devictor V, Jiguet F, & Couvet D (2006) Sp
 
 \examples{ 
 # Read an interaction matrix
-MAT <- 'http://www.nceas.ucsb.edu/interactionweb/data/host_parasite/text_matrices/mcgregor_p.txt'
-mat <- t(read.table(MAT))
-# Returns host range
-getspe(mat,hr)
+MAT <- std.matrix('http://www.nceas.ucsb.edu/interactionweb/data/host_parasite/text_matrices/mcgregor_p.txt',t=TRUE)
 } 

@@ -6,7 +6,7 @@ get.LSD <- function(fit)
 	return(out)
 }
 
-get.HR <- function(pop)
+get.RR <- function(pop)
 {
 	Ni <- sum(pop>0)
 	N <- length(pop)
@@ -66,12 +66,12 @@ ssi <- function(m)
 	return(spe)
 }
 
-hr <- function(m)
+rr <- function(m)
 {
 	spe <- vector('numeric',length=nrow(m))
 	for(i in 1:nrow(m))
 	{
-		spe[i] <- get.HR(as.vector(as.numeric(m[i,])))
+		spe[i] <- get.RR(as.vector(as.numeric(m[i,])))
 	}
 	return(spe)
 }
@@ -86,3 +86,22 @@ getspe <- function(mat,measure=lsd)
 
 cv		= function(d) sd(d)/mean(d)
 last	= function(d) d[length(d)]
+scale = function(v,m=0,M=1)
+{
+	v <- v-min(v)
+	v <- v/max(v)
+	v <- v*(M-m)
+	v <- v+m
+	return(v)
+}
+dmat = function(m,n=2)
+{
+	e <- (max(m)-min(m))/n
+	cl <- seq(from=0,to=1,by=e)
+	nm <- matrix(0,ncol=ncol(m),nrow=nrow(m))
+	for(i in 1:(length(cl)-1))
+	{
+		nm[(cl[i]<m)&(m<=cl[(i+1)])] <- cl[i]
+	}
+	return(scale(nm,0,1))
+}
