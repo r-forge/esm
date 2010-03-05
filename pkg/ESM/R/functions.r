@@ -1,4 +1,4 @@
-get.LSD <- function(fit)
+get.PDI <- function(fit)
 {
 	fit <- sort(as.vector(fit),decreasing=TRUE)
 	test <- fit[2:length(fit)]
@@ -36,12 +36,12 @@ get.SSI <- function(occup)
 	return(SSI)
 }
 
-lsd <- function(m)
+PDI <- function(m)
 {
 	spe <- vector('numeric',length=nrow(m))
 	for(i in 1:nrow(m))
 	{
-		spe[i] <- get.LSD(m[i,])
+		spe[i] <- get.PDI(m[i,])
 	}
 	return(spe)
 }
@@ -76,7 +76,7 @@ rr <- function(m)
 	return(spe)
 }
 
-getspe <- function(mat,measure=lsd)
+getspe <- function(mat,measure=PDI)
 {
 	if(max(mat)!=1){mat<-mat/max(mat)}
 	out <- measure(as.matrix(mat))
