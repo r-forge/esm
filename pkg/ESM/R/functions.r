@@ -1,5 +1,6 @@
 get.PDI <- function(fit)
 {
+	if(length(fit)==1){return(1)}
 	fit <- sort(as.vector(fit),decreasing=TRUE)
 	test <- fit[2:length(fit)]
 	out <- sum(fit[1]-test)/length(test)
@@ -8,6 +9,7 @@ get.PDI <- function(fit)
 
 get.RR <- function(pop)
 {
+	if(length(pop)==1){return(1)}
 	Ni <- sum(pop>0)
 	N <- length(pop)
 	return(1-(Ni-1)/(N-1))
@@ -15,6 +17,7 @@ get.RR <- function(pop)
 
 get.HS <- function(pop)
 {
+	if(length(pop)==1){return(1)}
 	partiel <- NULL
 	pop <- as.vector(pop)+0.000000000001
 	for(i in 1:length(pop))
@@ -28,6 +31,7 @@ get.HS <- function(pop)
 
 get.SSI <- function(occup)
 {
+	if(length(occup)==1){return(1)}
 	score <- NULL
 	fit <- as.vector(occup)
 	h <- sum(fit>0)
@@ -86,6 +90,7 @@ getspe <- function(mat,measure=PDI)
 
 cv		= function(d) sd(d)/mean(d)
 last	= function(d) d[length(d)]
+
 scale = function(v,m=0,M=1)
 {
 	v <- v-min(v)
@@ -94,6 +99,7 @@ scale = function(v,m=0,M=1)
 	v <- v+m
 	return(v)
 }
+
 dmat = function(m,n=2)
 {
 	e <- (max(m)-min(m))/n

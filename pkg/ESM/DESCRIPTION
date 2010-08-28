@@ -1,6 +1,6 @@
 Package: ESM
-Version: 1.0.0-02
-Date: 2010-02-04
+Version: 1.1.0-05
+Date: 2010-04-27
 Title: Ecological Specificity Measures
 Author: Timothee Poisot <tpoisot@um2.fr>
 Maintainer: Timothee Poisot <tpoisot@um2.fr>
@@ -8,4 +8,4 @@ Depends: R (>= 2.1.0)
 Suggests: vegan, bipartite, ade4
 Description: Performs several measures of ecological specificity 
 License: GPL (>= 2) 
-URL: http://www.timotheepoisot.fr/R/
+URL: http://www.timotheepoisot.fr/
