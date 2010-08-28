@@ -15,11 +15,12 @@ get.RR <- function(pop)
 	return(1-(Ni-1)/(N-1))
 }
 
-get.HS <- function(pop)
+get.HS <- function(pop,ifzero=1e-12)
 {
 	if(length(pop)==1){return(1)}
 	partiel <- NULL
-	pop <- as.vector(pop)+0.000000000001
+	pop <- as.vector(pop)
+	pop[pop==0] <- ifzero
 	for(i in 1:length(pop))
 	{
 		p <- pop[i]/sum(pop)
@@ -40,7 +41,7 @@ get.SSI <- function(occup)
 	return(SSI)
 }
 
-PDI <- function(m)
+pdi <- function(m)
 {
 	spe <- vector('numeric',length=nrow(m))
 	for(i in 1:nrow(m))
@@ -80,10 +81,10 @@ rr <- function(m)
 	return(spe)
 }
 
-getspe <- function(mat,measure=PDI)
+getspe <- function(mat,measure=pdi,...)
 {
 	if(max(mat)!=1){mat<-mat/max(mat)}
-	out <- measure(as.matrix(mat))
+	out <- measure(as.matrix(mat),...)
 	names(out) <- rownames(mat)
 	return(out)
 }
