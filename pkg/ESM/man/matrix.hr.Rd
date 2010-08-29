@@ -12,5 +12,5 @@ matrix.hr(matrix)
 }
 
 \value{
-	\item{matrix}{A 0/1 interaction matrix}
+	\item{matrix}{A 0/1 (binary) interaction matrix}
 }

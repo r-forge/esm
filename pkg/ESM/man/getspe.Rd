@@ -18,7 +18,7 @@ getspe(mat,measure=lsd)
  
 \details{Values of \kbd{measure} can be : \kbd{rr}, the classical resource range; \kbd{ssi}, the species specialization index; \kbd{lsd}, the Link Strength Difference index; \kbd{hs}, Shannon's entropy.}
 
-\references{For LSD, and this package, cite : Poisot, T, Canard E, Mouquet N & Hochberg, M E "..." XXX.
+\references{For PDI, and this package, cite : Poisot, T, Canard E, Mouquet N & Hochberg, M E "..." XXX.
 
 For HS, cite : Schug J, et al. (2005) Promoter features related to tissue specificity as measured by Shannon entropy. Genome biology 6(4):R33
 
