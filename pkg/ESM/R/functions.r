@@ -1,4 +1,6 @@
-get.PDI <- function(fit)
+empty = function(mat) mat[rowSums(mat)>0,colSums(mat)>0]
+
+pdi <- function(fit)
 {
 	if(length(fit)==1){return(1)}
 	fit <- sort(as.vector(fit),decreasing=TRUE)
@@ -7,84 +9,41 @@ get.PDI <- function(fit)
 	return(out)
 }
 
-get.RR <- function(pop)
+rr <- function(fit)
 {
-	if(length(pop)==1){return(1)}
-	Ni <- sum(pop>0)
-	N <- length(pop)
+	if(length(fit)==1){return(1)}
+	Ni <- sum(fit>0)
+	N <- length(fit)
 	return(1-(Ni-1)/(N-1))
 }
 
-get.HS <- function(pop,ifzero=1e-12)
+hs <- function(fit,ifzero=1e-12)
 {
-	if(length(pop)==1){return(1)}
-	partiel <- NULL
-	pop <- as.vector(pop)
-	pop[pop==0] <- ifzero
-	for(i in 1:length(pop))
-	{
-		p <- pop[i]/sum(pop)
-		partiel[i] <- p * log(p)
-	}
-	shannon <- ifelse(length(pop)<=1,0,-sum(partiel) / log(length(pop)))
+	if(length(fit)==1){return(1)}
+	fit <- as.vector(fit)
+	fit[fit==0] <- ifzero
+	pp <- fit/sum(fit)
+	partiel <- pp * log(pp)
+	shannon <- ifelse(length(fit)<=1,0,-sum(partiel) / log(length(fit)))
 	return(1-shannon)
 }
 
-get.SSI <- function(occup)
+ssi <- function(fit)
 {
-	if(length(occup)==1){return(1)}
+	if(length(fit)==1){return(1)}
 	score <- NULL
-	fit <- as.vector(occup)
+	fit <- as.vector(fit)
 	h <- sum(fit>0)
-	H <- length(occup)
+	H <- length(fit)
 	SSI <- sqrt((H/h-1)/(H-1))
 	return(SSI)
 }
 
-pdi <- function(m)
-{
-	spe <- vector('numeric',length=nrow(m))
-	for(i in 1:nrow(m))
-	{
-		spe[i] <- get.PDI(m[i,])
-	}
-	return(spe)
-}
-
-hs <- function(m)
-{
-	spe <- vector('numeric',length=nrow(m))
-	for(i in 1:nrow(m))
-	{
-		spe[i] <- get.HS(as.vector(as.numeric(m[i,])))
-	}
-	return(spe)
-}
-
-ssi <- function(m)
-{
-	spe <- vector('numeric',length=nrow(m))
-	for(i in 1:nrow(m))
-	{
-		spe[i] <- get.SSI(as.vector(as.numeric(m[i,])))
-	}
-	return(spe)
-}
-
-rr <- function(m)
-{
-	spe <- vector('numeric',length=nrow(m))
-	for(i in 1:nrow(m))
-	{
-		spe[i] <- get.RR(as.vector(as.numeric(m[i,])))
-	}
-	return(spe)
-}
-
 getspe <- function(mat,measure=pdi,...)
 {
-	if(max(mat)!=1){mat<-mat/max(mat)}
-	out <- measure(as.matrix(mat),...)
+	mat <- empty(mat)
+	mat <- mat/max(mat)
+	out <- unlist(apply(mat,1,measure,...))
 	names(out) <- rownames(mat)
 	return(out)
 }

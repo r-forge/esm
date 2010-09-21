@@ -56,19 +56,17 @@ ViewNetwork <- function(data,org.col='grey',res.col='grey',border=NA,sortorg=c(1
 		)
 }
 
-ViewMatrix = function(web,type='diagonal',nonull=TRUE,gr.lty=1,gr.col='lightgrey',no.fg='black',no.bg='black',...)
+ViewMatrix = function(web,type='diagonal',gr.lty=1,gr.col='lightgrey',no.fg='black',no.bg='black',...)
 {
+	web <- empty(web)
 	if(max(web)>1){web <- web/max(web)}
-	if(nonull){web<-web[(rowSums(web)>0),(colSums(web)>0)]}
 	## This is from bipartite
 	if (type == "diagonal") {
 		require(vegan)
-		web <- empty(web)
 		ca <- cca(web)
 		web <- web[order(summary(ca)$sites[, 1], decreasing = TRUE), order(summary(ca)$species[, 1], decreasing = TRUE)]
 	}
 	if (type == "nested") {
-		web <- empty(web)
 		web <- web[order(rowSums(web), decreasing = TRUE), order(colSums(web), decreasing = TRUE)]
 	}
 	## This is not from bipartite anymore
