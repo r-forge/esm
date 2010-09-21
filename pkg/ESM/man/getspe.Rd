@@ -4,12 +4,13 @@
 \title{Specificity}
 \description{Returns a vector containing the specificity of each organism}
 \usage{ 
-getspe(mat,measure=pdi)
+getspe(mat,measure=pdi,...)
 }
 
 \arguments{ 
 \item{mat}{A matrix giving the performance of each organism on each resource, with organisms as rows} 
-\item{measure}{The index of specificity to use. Values can be} 
+\item{measure}{The index of specificity to use. See details, defaults to \kbd{pdi}.}
+\item{...}{Additional arguments to be passed to \kbd{measure}} 
 }
 
 \value{
@@ -29,5 +30,5 @@ For SSI, cite : Julliard R, Clavel J, Devictor V, Jiguet F, & Couvet D (2006) Sp
 MAT <- 'http://www.nceas.ucsb.edu/interactionweb/data/host_parasite/text_matrices/mcgregor_p.txt'
 mat <- t(read.table(MAT))
 # Returns host range
-getspe(mat,lsd)
+getspe(mat)
 } 
