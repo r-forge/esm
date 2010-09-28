@@ -11,9 +11,9 @@ pdi <- function(fit)
 
 rr <- function(fit)
 {
-	if(length(fit)==1){return(1)}
-	Ni <- sum(fit>0)
 	N <- length(fit)
+	if(N==1){return(1)}
+	Ni <- sum(fit>0)
 	return(1-(Ni-1)/(N-1))
 }
 
@@ -39,10 +39,11 @@ ssi <- function(fit)
 	return(SSI)
 }
 
-getspe <- function(mat,measure=pdi,...)
+getspe <- function(mat,measure=pdi,normal='whole',...)
 {
 	mat <- empty(mat)
-	mat <- mat/max(mat)
+	if(normal=='species'){mat <- t(apply(mat,1,function(x)x/max(x)))}
+	if(normal=='whole'){mat <- mat/max(mat)}
 	out <- unlist(apply(mat,1,measure,...))
 	names(out) <- rownames(mat)
 	return(out)
@@ -70,4 +71,43 @@ dmat = function(m,n=2)
 		nm[(cl[i]<m)&(m<=cl[(i+1)])] <- cl[i]
 	}
 	return(scale(nm,0,1))
+}
+
+Overlap = function(mat)
+{
+	for(i in 1:nrow(mat))
+	{
+		mat[i,] <- mat[i,]/sum(mat[i,])
+	}
+	out <- matrix(0,nrow=nrow(mat),ncol=nrow(mat))
+	colnames(out) <- rownames(mat)
+	rownames(out) <- rownames(mat)
+	for(i in 1:(nrow(mat)-1))
+	{
+		for(j in (i+1):nrow(mat))
+		{
+			out[i,j] <- 1-1/2*sum(abs(mat[i,]-mat[j,]))
+		}
+	}
+	diag(out) <- rep(1,length(diag(out)))
+	return(out)
+}
+
+getOLsp = function(OLmat,id)
+{
+	byR <- OLmat[id,]
+	byC <- OLmat[,id]
+	OlSP <- c(byR[c((id+1):length(byR))],byC[c(1:(id-1))])
+	return(OlSP)
+}
+
+getOLvec = function(net)
+{
+	net <- empty(net)
+	net <- net/max(net)
+	OLmat <- Overlap(net)
+	l <- c(1:nrow(OLmat))
+	OL <- lapply(l,function(x)getOLsp(OLmat,id=x))
+	if(!is.null(rownames(OLmat))){names(OL)<-rownames(OLmat)}
+	return(OL)
 }
