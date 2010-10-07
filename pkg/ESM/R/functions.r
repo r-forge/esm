@@ -1,4 +1,4 @@
-empty = function(mat) mat[rowSums(mat)>0,colSums(mat)>0]
+fixmat = function(mat) mat[rowSums(mat)>0,colSums(mat)>0]
 
 pdi <- function(fit)
 {
@@ -41,7 +41,7 @@ ssi <- function(fit)
 
 getspe <- function(mat,measure=pdi,normal='whole',...)
 {
-	mat <- empty(mat)
+	mat <- fixmat(mat)
 	if(normal=='species'){mat <- t(apply(mat,1,function(x)x/max(x)))}
 	if(normal=='whole'){mat <- mat/max(mat)}
 	out <- unlist(apply(mat,1,measure,...))
