@@ -38,16 +38,17 @@ hs <- function(fit,ifzero=1e-12)
 	return(1-shannon)
 }
 
-ssi <- function(fit)
-{
-	if(length(fit)==1){return(1)}
-	score <- NULL
+ssi = function(fit)
+{ # Normalized and using quantitative data
+	if (length(fit) == 1) {
+        return(1)
+    }
+	n <- length(fit)
 	fit <- as.vector(fit)
-	h <- sum(fit>0)
-	H <- length(fit)
-	SSI <- sqrt((H/h-1)/(H-1))
-	return(SSI)
+	S <- sqrt(sum((fit-mean(fit))^2))
+	return((S/mean(fit))/(n*sqrt((n-1)/n)))
 }
+
 
 getspe <- function(mat,measure=pdi,normal='species',...)
 {
