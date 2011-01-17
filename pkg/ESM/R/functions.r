@@ -1,4 +1,25 @@
 fixmat = function(mat) mat[rowSums(mat)>0,colSums(mat)>0]
+subsamp = function(mat,nc=5,nr=5) fixmat(mat[sample(c(1:nrow(mat)),nr,replace=FALSE),sample(c(1:ncol(mat)),nc,replace=FALSE)])
+
+entropy = function(vec)
+{
+	uns <- unique(vec)
+	ps <- NULL
+	for(i in 1:length(uns))
+	{
+		ps <- c(ps,sum(vec==uns[i])/length(vec))
+	}
+	ENT = -sum(ps*log(ps))
+	INF = ENT/log(length(uns))
+	return(as.data.frame(list(E=ENT,I=INF)))
+}
+
+simpson = function(fit)
+{
+	fit <- round(fit*1000,0)
+	Simp <- sum(fit*(fit-1))/(sum(fit)*(sum(fit)-1))
+	return(Simp)
+}
 
 pdi <- function(fit)
 {
@@ -38,7 +59,7 @@ hs <- function(fit,ifzero=1e-12)
 	return(1-shannon)
 }
 
-ssi = function(fit)
+ssi <- function(fit)
 { # Normalized and using quantitative data
 	if (length(fit) == 1) {
         return(1)
