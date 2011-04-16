@@ -93,14 +93,14 @@ scale = function(v,m=0,M=1)
 	return(v)
 }
 
-dmat = function(m,n=2)
+dmat = function(mat,n=2)
 {
-	e <- (max(m)-min(m))/n
-	cl <- seq(from=0,to=1,by=e)
-	nm <- matrix(0,ncol=ncol(m),nrow=nrow(m))
-	for(i in 1:(length(cl)-1))
+	new <- mat
+	Levs <- seq(min(mat),max(mat),length=n)
+	for(i in 1:length(Levs))
 	{
-		nm[(cl[i]<m)&(m<=cl[(i+1)])] <- cl[i]
+		AreOk <- (new>Levs[i])&(new<=Levs[(i+1)])
+		new[AreOk] <- Levs[(i+1)]
 	}
-	return(scale(nm,0,1))
+	return(new)
 }
