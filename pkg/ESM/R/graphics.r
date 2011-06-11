@@ -93,3 +93,21 @@ ViewMatrix = function(web,type='diagonal',gr.lty=1,gr.col='lightgrey',no.fg='bla
 	axis(2,at=c(1:nr)-0.5,labels=rownames(web),tick=FALSE,crt=45,cex=0.2)
 	par(op)
 }
+
+plotspe = function(x,...,palette=rainbow)
+{
+	spe <- getspe(x,...)
+	xs <- scale(c(1:ncol(x))/ncol(x),0,1)
+	
+	Colors <- palette(21)
+	spe <- round(spe*20,0)+1
+	
+	par(xaxs='i',yaxs='i')
+	plot(0,pch=NA,ylim=c(0,1),xlim=range(xs))
+	polygon(x=c(0,1,0),y=c(0,0,1),border=NA,col='lightgrey')
+	for(i in 1:nrow(x))
+	{
+		lines(xs,sort(x[i,]/max(x[i,]),decreasing=TRUE),lwd=2,col=Colors[spe[i]])
+	}
+	par(xaxs='r',yaxs='r')
+}
